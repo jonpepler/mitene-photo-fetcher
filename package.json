@@ -14,6 +14,7 @@
   "author": "jonpepler",
   "license": "ISC",
   "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.21",
     "@types/node": "^20.3.3",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "eslint": "^8.44.0",
@@ -32,6 +33,10 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
+    "@commander-js/extra-typings": "^11.0.0",
+    "commander": "^11.0.0",
+    "fast-exif": "^2.0.1",
+    "fluent-ffmpeg": "^2.1.2",
     "puppeteer": "^20.7.4"
   }
 }
