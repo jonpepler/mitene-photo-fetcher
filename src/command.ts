@@ -20,6 +20,11 @@ const program = new Command()
     '-s, --file-suffix <string>',
     'Provide a string to be included at the end of each media file, after a timestamp.'
   )
+  .option(
+    '-h, --headless <boolean>',
+    'Choose to run Chrome in headless mode or not. Defaults to true',
+    'true'
+  )
 
 program.parse()
 
@@ -31,6 +36,7 @@ interface ResolvedOptions {
   albumId: string
   password?: string
   fileSuffix?: string
+  headless: boolean
 }
 
 const getDateRangeValue = (date: string) => new Date(date)
@@ -40,26 +46,23 @@ const normaliseRange = ({ from, to }: { from: Date; to: Date }) =>
 
 // both from and to, or month
 const validate = (opts: Options<typeof program>): ResolvedOptions => {
-  if (opts.from !== undefined && opts.to !== undefined)
-    return Object.assign(
-      normaliseRange({
-        from: getDateRangeValue(opts.from),
-        to: getDateRangeValue(opts.to)
-      }),
-      {
-        albumId: opts.albumId,
-        password: opts.password,
-        fileSuffix: opts.fileSuffix
-      }
-    )
-  if (opts.month !== undefined)
-    return Object.assign(monthToDateRange(opts.month), {
-      albumId: opts.albumId,
-      password: opts.password,
-      fileSuffix: opts.fileSuffix
-    })
-
-  throw new Error('Missing required arguments.')
+  if (
+    (opts.from === undefined || opts.to === undefined) &&
+    opts.month === undefined
+  )
+    throw new Error('Missing required arguments.')
+  return {
+    ...(opts.from !== undefined && opts.to !== undefined
+      ? normaliseRange({
+          from: getDateRangeValue(opts.from),
+          to: getDateRangeValue(opts.to)
+        })
+      : monthToDateRange(opts.month as string)),
+    albumId: opts.albumId,
+    password: opts.password,
+    fileSuffix: opts.fileSuffix,
+    headless: opts.headless === 'true'
+  }
 }
 
 const preOptions = validate(program.opts())

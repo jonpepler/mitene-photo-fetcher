@@ -112,7 +112,9 @@ const run = async () => {
   }
 
   if (!fs.existsSync(imagesDirectory)) fs.mkdirSync(imagesDirectory)
-  const browser = await puppeteer.launch({ headless: false })
+  const browser = await puppeteer.launch({
+    headless: options.headless ? 'new' : false
+  })
   const page = await browser.newPage()
 
   const client = await page.target().createCDPSession()
