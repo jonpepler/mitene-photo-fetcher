@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/jonpepler/mitene-photo-fetcher/compare/v1.1.6...v1.2.0) (2023-07-28)
+
+
+### Features
+
+* support new flag --directory to choose download location ([0af7c7f](https://github.com/jonpepler/mitene-photo-fetcher/commit/0af7c7f5cab5b176788fde4863b9ca9d61de2a46))
+
 ### [1.1.6](https://github.com/jonpepler/mitene-photo-fetcher/compare/v1.1.5...v1.1.6) (2023-07-28)
 
 
