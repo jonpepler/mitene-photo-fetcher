@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/jonpepler/mitene-photo-fetcher/compare/v1.2.0...v1.3.0) (2023-07-28)
+
+
+### Features
+
+* add better logging with new quiet option ([8ac4585](https://github.com/jonpepler/mitene-photo-fetcher/commit/8ac4585a78358e4876224b0dc7cc006c61cf4506))
+* improve logging ([27f446e](https://github.com/jonpepler/mitene-photo-fetcher/commit/27f446ec237b41835798419cad9fa07ea41e72bc))
+* output list of files or output directory, based on quiet flag ([5a206c7](https://github.com/jonpepler/mitene-photo-fetcher/commit/5a206c7d0e8273135dde1fa52d6330a692396a83))
+* support zipping final directory ([470b497](https://github.com/jonpepler/mitene-photo-fetcher/commit/470b4979e3b2112ee5a48d319499830c2e38de80))
+
 ## [1.2.0](https://github.com/jonpepler/mitene-photo-fetcher/compare/v1.1.6...v1.2.0) (2023-07-28)
 
 
