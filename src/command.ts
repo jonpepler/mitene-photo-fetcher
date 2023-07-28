@@ -20,14 +20,14 @@ const program = new Command()
     '-s, --file-suffix <string>',
     'Provide a string to be included at the end of each media file, after a timestamp.'
   )
-  .option(
-    '-h, --headless <boolean>',
-    'Choose to run Chrome in headless mode or not. Defaults to true',
-    'true'
-  )
+  .option('-h, --no-headless', 'Show the Chrome test browser')
   .requiredOption(
     '-d, --directory <string>',
     'Specify a path to download the media files too. e.g. "./images"'
+  )
+  .option(
+    '-q, --quiet',
+    'Prevent all logs and output a list of all files when complete.'
   )
 
 program.parse()
@@ -42,6 +42,7 @@ interface ResolvedOptions {
   fileSuffix?: string
   headless: boolean
   directory: string
+  quiet: boolean
 }
 
 const getDateRangeValue = (date: string) => new Date(date)
@@ -66,8 +67,9 @@ const validate = (opts: Options<typeof program>): ResolvedOptions => {
     albumId: opts.albumId,
     password: opts.password,
     fileSuffix: opts.fileSuffix,
-    headless: opts.headless === 'true',
-    directory: opts.directory
+    headless: opts.headless ?? false,
+    directory: opts.directory,
+    quiet: opts.quiet ?? false
   }
 }
 
