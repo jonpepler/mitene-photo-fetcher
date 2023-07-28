@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.6](https://github.com/jonpepler/mitene-photo-fetcher/compare/v1.1.5...v1.1.6) (2023-07-28)
+
+
+### Bug Fixes
+
+* add a node shebang to index ([f53e0c8](https://github.com/jonpepler/mitene-photo-fetcher/commit/f53e0c8a95f6bb74553d4fce8afa83460cc03574))
+
 ### [1.1.5](https://github.com/jonpepler/mitene-photo-fetcher/compare/v1.1.4...v1.1.5) (2023-07-28)
 
 ### [1.1.4](https://github.com/jonpepler/mitene-photo-fetcher/compare/v1.1.3...v1.1.4) (2023-07-28)
