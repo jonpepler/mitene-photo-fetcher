@@ -14,6 +14,9 @@
     "type": "git",
     "url": "git@github.com:jonpepler/mitene-photo-fetcher.git"
   },
+  "bin": {
+    "mitene-photo-fetcher": "dist/index.js"
+  },
   "author": "jonpepler",
   "license": "ISC",
   "devDependencies": {
