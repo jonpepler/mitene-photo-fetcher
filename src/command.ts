@@ -25,6 +25,10 @@ const program = new Command()
     'Choose to run Chrome in headless mode or not. Defaults to true',
     'true'
   )
+  .requiredOption(
+    '-d, --directory <string>',
+    'Specify a path to download the media files too. e.g. "./images"'
+  )
 
 program.parse()
 
@@ -37,6 +41,7 @@ interface ResolvedOptions {
   password?: string
   fileSuffix?: string
   headless: boolean
+  directory: string
 }
 
 const getDateRangeValue = (date: string) => new Date(date)
@@ -61,7 +66,8 @@ const validate = (opts: Options<typeof program>): ResolvedOptions => {
     albumId: opts.albumId,
     password: opts.password,
     fileSuffix: opts.fileSuffix,
-    headless: opts.headless === 'true'
+    headless: opts.headless === 'true',
+    directory: opts.directory
   }
 }
 
