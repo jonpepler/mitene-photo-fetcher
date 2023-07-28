@@ -46,6 +46,7 @@
     "commander": "^11.0.0",
     "fast-exif": "^2.0.1",
     "fluent-ffmpeg": "^2.1.2",
-    "puppeteer": "^20.7.4"
+    "puppeteer": "^20.7.4",
+    "zip-a-folder": "^2.0.0"
   }
 }

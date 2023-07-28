@@ -27,7 +27,15 @@ const program = new Command()
   )
   .option(
     '-q, --quiet',
-    'Prevent all logs and instead output a list of all files when complete.'
+    'Prevent all logs and instead output a list of all files when complete. When used with --zip, only output the final zip directory.'
+  )
+  .option(
+    '-z, --zip',
+    'Zip the folder specified by the directory flag when complete. Delete directory. Use --preserve-directory to prevent deletion.'
+  )
+  .option(
+    '-p, --prevent-deletion',
+    'Used with --zip flag. Do not delete provided directory after zipping folder.'
   )
 
 program.parse()
@@ -43,6 +51,8 @@ interface ResolvedOptions {
   headless: boolean
   directory: string
   quiet: boolean
+  zip: boolean
+  preventDeletion: boolean
 }
 
 const getDateRangeValue = (date: string) => new Date(date)
@@ -69,7 +79,9 @@ const validate = (opts: Options<typeof program>): ResolvedOptions => {
     fileSuffix: opts.fileSuffix,
     headless: opts.headless ?? false,
     directory: opts.directory,
-    quiet: opts.quiet ?? false
+    quiet: opts.quiet ?? false,
+    zip: opts.zip ?? false,
+    preventDeletion: opts.preventDeletion ?? false
   }
 }
 

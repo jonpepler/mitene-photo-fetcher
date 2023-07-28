@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import { zip } from 'zip-a-folder'
 
 import { imagesDirectory } from './directory'
 import { getTimestampFromFilename } from './getTimestamp'
@@ -26,17 +27,23 @@ export const isFilenameUsedInDirectory = (
   )
 }
 
+const rename = async (oldPath: string, newPath: string) => {
+  return await new Promise<string>((resolve, reject) => {
+    fs.rename(oldPath, newPath, (err) => {
+      if (err != null) reject(err)
+      resolve(newPath)
+    })
+  })
+}
+
 const renameFile = async (
   oldPath: string,
   newPath: string
 ): Promise<string> => {
-  return await new Promise((resolve, reject) => {
-    const filename = path.resolve(imagesDirectory, newPath)
-    fs.rename(path.resolve(imagesDirectory, oldPath), filename, (err) => {
-      if (err != null) reject(err)
-      resolve(filename)
-    })
-  })
+  return await rename(
+    path.resolve(imagesDirectory, oldPath),
+    path.resolve(imagesDirectory, newPath)
+  )
 }
 
 export const renameFilesToTimestamp = async (imgUuids: string[]) => {
@@ -60,7 +67,7 @@ export const renameFilesToTimestamp = async (imgUuids: string[]) => {
     })
   )
 
-  if (options.quiet)
+  if (options.quiet && !options.zip)
     paths.forEach((path) => {
       console.log(path)
     })
@@ -68,4 +75,17 @@ export const renameFilesToTimestamp = async (imgUuids: string[]) => {
 
 export const createImageDirectory = () => {
   if (!fs.existsSync(imagesDirectory)) fs.mkdirSync(imagesDirectory)
+}
+
+export const zipFolder = async () => {
+  const zipPath = path.resolve(imagesDirectory + '.zip')
+  const tempPath = path.resolve('./.temp.zip')
+  log(`Zipping files to ${zipPath}...`)
+  await zip(imagesDirectory, tempPath)
+  if (!options.preventDeletion) {
+    fs.rmSync(imagesDirectory, { recursive: true, force: true })
+  }
+  await rename(tempPath, zipPath)
+  log(`Zipping complete.`)
+  if (options.quiet) console.log(zipPath)
 }

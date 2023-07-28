@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
-import { createImageDirectory, renameFilesToTimestamp } from './file'
+import { createImageDirectory, renameFilesToTimestamp, zipFolder } from './file'
 import { downloadImagesFromUuids } from './download'
 import { getImgUuids, goToAlbumPage, login } from './pageActions'
 import { createPage } from './page'
 import { log } from './console'
 import { imagesDirectory } from './directory'
+import { options } from './command'
 
 const run = async () => {
   createImageDirectory()
@@ -21,7 +22,12 @@ const run = async () => {
   await downloadImagesFromUuids(page, imgUuids)
 
   await renameFilesToTimestamp(imgUuids)
-  log(`Files saved to ${imagesDirectory}.`)
+
+  if (options.zip) {
+    await zipFolder()
+  } else {
+    log(`Files saved to ${imagesDirectory}.`)
+  }
 
   await close()
 }
