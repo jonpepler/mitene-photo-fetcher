@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.4](https://github.com/jonpepler/mitene-photo-fetcher/compare/v1.1.3...v1.1.4) (2023-07-28)
+
+
+### Bug Fixes
+
+* make package executable ([7f0d400](https://github.com/jonpepler/mitene-photo-fetcher/commit/7f0d400c40350cfaac4807e2bf2a5e23fc72e0ed))
+
 ### [1.1.3](https://github.com/jonpepler/mitene-photo-fetcher/compare/v1.1.2...v1.1.3) (2023-07-28)
 
 
