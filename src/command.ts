@@ -27,7 +27,7 @@ const program = new Command()
   )
   .option(
     '-q, --quiet',
-    'Prevent all logs and output a list of all files when complete.'
+    'Prevent all logs and instead output a list of all files when complete.'
   )
 
 program.parse()

@@ -3,6 +3,8 @@ import path from 'path'
 
 import { imagesDirectory } from './directory'
 import { getTimestampFromFilename } from './getTimestamp'
+import { options } from './command'
+import { log } from './console'
 
 export const getFullFilenameFromTitle = (title: string): [string, string] => {
   const files = fs.readdirSync(imagesDirectory)
@@ -24,16 +26,16 @@ export const isFilenameUsedInDirectory = (
   )
 }
 
-const renameFile = async (oldPath: string, newPath: string): Promise<void> => {
-  await new Promise<void>((resolve, reject) => {
-    fs.rename(
-      path.resolve(imagesDirectory, oldPath),
-      path.resolve(imagesDirectory, newPath),
-      (err) => {
-        if (err != null) reject(err)
-        resolve()
-      }
-    )
+const renameFile = async (
+  oldPath: string,
+  newPath: string
+): Promise<string> => {
+  return await new Promise((resolve, reject) => {
+    const filename = path.resolve(imagesDirectory, newPath)
+    fs.rename(path.resolve(imagesDirectory, oldPath), filename, (err) => {
+      if (err != null) reject(err)
+      resolve(filename)
+    })
   })
 }
 
@@ -52,11 +54,16 @@ export const renameFilesToTimestamp = async (imgUuids: string[]) => {
     })
   )
 
-  await Promise.all(
+  const paths = await Promise.all(
     renameJobs.map(async ({ filename, newName }) => {
-      await renameFile(filename, newName)
+      return await renameFile(filename, newName)
     })
   )
+
+  if (options.quiet)
+    paths.forEach((path) => {
+      console.log(path)
+    })
 }
 
 export const createImageDirectory = () => {
