@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { createImageDirectory, renameFilesToTimestamp } from './file'
 import { downloadImagesFromUuids } from './download'
 import { getImgUuids, goToAlbumPage, login } from './pageActions'
