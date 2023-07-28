@@ -2,7 +2,7 @@ import { type Page } from 'puppeteer'
 import { imagesDirectory } from './directory'
 import { isFilenameUsedInDirectory } from './file'
 import { options } from './command'
-import { createProgressBar } from './console'
+import { createProgressBar, log } from './console'
 
 const waitForDownload = async (filename: string): Promise<void> => {
   if (isFilenameUsedInDirectory(filename, imagesDirectory)) return
@@ -30,6 +30,7 @@ const downloadImageFromUuid = async (page: Page, uuid: string) => {
 }
 
 export const downloadImagesFromUuids = async (page: Page, uuids: string[]) => {
+  log(`Downloading files to ${imagesDirectory}...`)
   const { increase, stop } = createProgressBar(uuids.length)
 
   for (const uuid of uuids) {

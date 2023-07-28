@@ -1,8 +1,10 @@
 import puppeteer from 'puppeteer'
 import { options } from './command'
 import { imagesDirectory } from './directory'
+import { log } from './console'
 
 export const createPage = async () => {
+  log('Creating test browser...')
   const browser = await puppeteer.launch({
     headless: options.headless ? 'new' : false
   })
@@ -20,6 +22,7 @@ export const createPage = async () => {
   return {
     page,
     close: async () => {
+      log('Closing browser...')
       await browser.close()
     }
   }

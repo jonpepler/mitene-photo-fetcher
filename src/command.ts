@@ -2,6 +2,12 @@ import { Command } from '@commander-js/extra-typings'
 import { monthToDateRange } from './monthToDateRange'
 
 const program = new Command()
+  .name('mitene-photo-fetcher')
+  .usage('...args')
+  .addHelpText(
+    'after',
+    'Example usage: mitene-photo-fetcher --from 2023-07-19 --to 2023-7-21 --albumId sd1FC1irlg3 --password ********  --file-suffix familyalbum  --directory ./images --zip'
+  )
   .option(
     '-f, --from <date>',
     'Date start range for photos, inclusive. Must be suplied with to parameter.'

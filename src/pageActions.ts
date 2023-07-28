@@ -1,9 +1,11 @@
 import { type Page } from 'puppeteer'
 import { options } from './command'
 import { getImageUuidsOnPage } from './getImageUuidsOnPage'
+import { log } from './console'
 
 export const login = async (page: Page) => {
   if (options.password !== undefined) {
+    log('Authenticating...')
     const inputSelector = 'input#session_password'
     const loginButtonSelector = 'input.single'
     await page.waitForSelector(inputSelector)
@@ -37,12 +39,16 @@ export const getImgData = async (page: Page) => {
 }
 
 // filter imgData to remove images from before from range and after to range, and then map to src only
-export const getImgUuids = async (page: Page) =>
-  (await getImgData(page))
+export const getImgUuids = async (page: Page) => {
+  log('Finding media file data...')
+  const imgData = (await getImgData(page))
     .filter(
       (img) => img.timestamp <= options.from && img.timestamp >= options.to
     )
     .map((img) => img.src)
+  log(`Found ${imgData.length} files in date range.`)
+  return imgData
+}
 
 export const goToAlbumPage = async (page: Page) =>
   await page.goto(`https://mitene.us/f/${options.albumId}`)

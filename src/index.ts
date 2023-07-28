@@ -20,7 +20,6 @@ const run = async () => {
   const imgUuids = await getImgUuids(page)
 
   await downloadImagesFromUuids(page, imgUuids)
-
   await renameFilesToTimestamp(imgUuids)
 
   if (options.zip) {

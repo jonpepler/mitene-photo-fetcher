@@ -74,6 +74,7 @@ export const renameFilesToTimestamp = async (imgUuids: string[]) => {
 }
 
 export const createImageDirectory = () => {
+  log('Creating directory if non-existant...')
   if (!fs.existsSync(imagesDirectory)) fs.mkdirSync(imagesDirectory)
 }
 
