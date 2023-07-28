@@ -1,6 +1,6 @@
 {
   "name": "mitene-photo-fetcher",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "A simple tool for batch downloading media files from Mitene.us, a photo albumn service. Uses Puppeteer with headless Chrome.",
   "main": "dist/index.js",
   "prepublish": "tsc",
