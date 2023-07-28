@@ -10,18 +10,18 @@ const program = new Command()
   )
   .option(
     '-f, --from <date>',
-    'Date start range for photos, inclusive. Must be suplied with to parameter.'
+    'Required with --to. Date start range for photos, inclusive. Must be suplied with to parameter.'
   )
   .option(
     '-t, --to <date>',
-    'Date start range for photos, inclusive. Must be suplied with from parameter.'
+    'Required with --from. Date start range for photos, inclusive. Must be suplied with from parameter.'
   )
   .option(
     '-m, --month <month>',
-    'Specify the month (1-12) or month name (e.g., January). Alternative to specifying full date range with from and to options.'
+    'Required if --from and --to not given. Specify the month (1-12) or month name (e.g., January). Alternative to specifying full date range with from and to options.'
   )
-  .requiredOption('-a, --albumId <album>', 'Specify the album ID.')
-  .option('-p, --password <string≠gp>', 'Specify the album ID.')
+  .requiredOption('-a, --albumId <album>', 'Required. Specify the album ID.')
+  .option('-p, --password <string>', 'The password for the album, if set.')
   .option(
     '-s, --file-suffix <string>',
     'Provide a string to be included at the end of each media file, after a timestamp.'
@@ -29,7 +29,7 @@ const program = new Command()
   .option('-h, --no-headless', 'Show the Chrome test browser')
   .requiredOption(
     '-d, --directory <string>',
-    'Specify a path to download the media files too. e.g. "./images"'
+    'Required. Specify a path to download the media files too. e.g. "./images"'
   )
   .option(
     '-q, --quiet',
