@@ -67,7 +67,6 @@ const validate = (opts: Options<typeof program>): ResolvedOptions => {
 
 const preOptions = validate(program.opts())
 
-console.log(preOptions)
 export const options = {
   ...preOptions,
   from: preOptions.from,

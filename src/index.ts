@@ -34,7 +34,6 @@ const getImageUuidsOnPage = async (
         ;(
           document.querySelector('.overlay-whole-layer') as HTMLImageElement
         )?.click()
-        console.log('src', el.src)
         const src = el.src.match(imgUuidRegex)?.[1]
         if (src === undefined)
           throw new Error('Failed to get src from image ' + el.src)
@@ -144,30 +143,20 @@ const run = async () => {
   let allImgsWithinDateRange = false
   let currentPage = 1
   while (!allImgsWithinDateRange) {
-    console.log(
-      imgData[imgData.length - 1].timestamp >= dateRange.to,
-      imgData[imgData.length - 1].timestamp,
-      dateRange.to
-    )
     if (imgData[imgData.length - 1].timestamp >= dateRange.to) {
       currentPage++
       await page.goto(getPageUrl(currentPage))
       imgData.push(...(await getImageUuidsOnPage(page)))
-      console.log(await page.$('.follower-paging-next-link .disabled'))
       continue
     }
     allImgsWithinDateRange = true
   }
-  console.log(imgData)
   // filter imgData to remove images from before from range and after to range, and then map to src only
-  console.log(imgData[5].timestamp)
   const imgUuids = imgData
     .filter(
       (img) => img.timestamp <= dateRange.from && img.timestamp >= dateRange.to
     )
     .map((img) => img.src)
-
-  console.log('Reduction Count: ', imgData.length, imgUuids.length)
 
   await downloadImagesFromUuids(page, imgUuids)
 
@@ -206,7 +195,6 @@ const run = async () => {
   )
 
   await browser.close()
-  console.log('end')
 }
 
 void run()

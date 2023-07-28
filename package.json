@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "release": "standard-version && npm publish",
+    "release": "standard-version && git push --follow-tags origin main && npm publish",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git@personal.github.com:jonpepler/mitene-photo-fetcher.git"
+    "url": "git@github.com:jonpepler/mitene-photo-fetcher.git"
   },
   "author": "jonpepler",
   "license": "ISC",
