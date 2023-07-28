@@ -1,6 +1,7 @@
 import FfmpegCommand from 'fluent-ffmpeg'
 import { read as exifRead } from 'fast-exif'
 import { isImage, isVideo } from './extensions'
+import { options } from './command'
 
 const probe = async (file: string): Promise<FfmpegCommand.FfprobeData> => {
   return await new Promise((resolve, reject) => {
@@ -15,7 +16,8 @@ const probe = async (file: string): Promise<FfmpegCommand.FfprobeData> => {
 }
 
 const timestampToFilenameFormat = (timestamp: string) =>
-  timestamp.split('Z')[0].replace(/[-:.T]/g, '_') + '_familyalbum'
+  timestamp.split('Z')[0].replace(/[-:.T]/g, '_') +
+  (options.fileSuffix !== undefined ? '_' + options.fileSuffix : '')
 
 // for files with no date, just use the previous date + 1
 let lastDateSet = new Date()

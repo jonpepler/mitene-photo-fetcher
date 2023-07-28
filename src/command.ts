@@ -16,6 +16,10 @@ const program = new Command()
   )
   .requiredOption('-a, --albumId <album>', 'Specify the album ID.')
   .option('-p, --password <string≠gp>', 'Specify the album ID.')
+  .option(
+    '-s, --file-suffix <string>',
+    'Provide a string to be included at the end of each media file, after a timestamp.'
+  )
 
 program.parse()
 
@@ -26,6 +30,7 @@ interface ResolvedOptions {
   to: Date
   albumId: string
   password?: string
+  fileSuffix?: string
 }
 
 const getDateRangeValue = (date: string) => new Date(date)
@@ -41,12 +46,17 @@ const validate = (opts: Options<typeof program>): ResolvedOptions => {
         from: getDateRangeValue(opts.from),
         to: getDateRangeValue(opts.to)
       }),
-      { albumId: opts.albumId, password: opts.password }
+      {
+        albumId: opts.albumId,
+        password: opts.password,
+        fileSuffix: opts.fileSuffix
+      }
     )
   if (opts.month !== undefined)
     return Object.assign(monthToDateRange(opts.month), {
       albumId: opts.albumId,
-      password: opts.password
+      password: opts.password,
+      fileSuffix: opts.fileSuffix
     })
 
   throw new Error('Missing required arguments.')
